@@ -1469,7 +1469,7 @@
           </p>
           <div class="badge-stats">
             <div>
-              <div class="stat-number">3+</div>
+              <div class="stat-number">4+</div>
               <div class="stat-label">Core Projects</div>
             </div>
             <div>
@@ -1743,6 +1743,31 @@
             <canvas class="project-visual-canvas" id="canvas-proj-3"></canvas>
             <div class="visual-content">🌱</div>
             <span class="project-card-arrow" style="pointer-events: none; opacity: 0.5;">→</span>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card reveal-item">
+          <div class="project-info">
+            <div class="project-number">04 · Python Application · First Project</div>
+            <h3 class="project-card-title">Hostel Management System</h3>
+            <p class="project-card-desc">
+              A Python-based desktop application designed to streamline and automate hostel operations, including student registration, room allocations, guest check-ins, and administrative tracking. Built as my introduction to database design and software engineering.
+            </p>
+            <div class="project-badges">
+              <span class="project-badge">Python</span>
+              <span class="project-badge">Database Management</span>
+              <span class="project-badge">GUI Application</span>
+              <span class="project-badge">First Programming Project</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/Manvi-9791/Hostel-Management-System-using-python" target="_blank" class="btn btn-secondary interactive">View Source</a>
+            </div>
+          </div>
+          <div class="project-visual">
+            <canvas class="project-visual-canvas" id="canvas-proj-4"></canvas>
+            <div class="visual-content">🏠</div>
+            <a href="https://github.com/Manvi-9791/Hostel-Management-System-using-python" target="_blank" class="project-card-arrow interactive">→</a>
           </div>
         </div>
 
@@ -2208,6 +2233,44 @@
         p3Canvas.width = 400;
         p3Canvas.height = 300;
         drawP3();
+      }
+
+      // Setup Project 4 Canvas (Hostel Management Grid Blocks)
+      const p4Canvas = document.getElementById('canvas-proj-4');
+      if (p4Canvas) {
+        const ctx = p4Canvas.getContext('2d');
+        let t = 0;
+        function drawP4() {
+          ctx.clearRect(0, 0, p4Canvas.width, p4Canvas.height);
+          const currentTheme = rootEl.getAttribute('data-theme');
+          ctx.fillStyle = currentTheme === 'dark' ? 'rgba(20, 184, 166, 0.05)' : 'rgba(99, 102, 241, 0.05)';
+          ctx.strokeStyle = currentTheme === 'dark' ? 'rgba(20, 184, 166, 0.15)' : 'rgba(99, 102, 241, 0.15)';
+          ctx.lineWidth = 1;
+
+          const size = 30;
+          const gap = 10;
+          const cols = Math.floor(p4Canvas.width / (size + gap));
+          const rows = Math.floor(p4Canvas.height / (size + gap));
+
+          for (let c = 0; c < cols; c++) {
+            for (let r = 0; r < rows; r++) {
+              const x = c * (size + gap) + 15;
+              const y = r * (size + gap) + 15;
+              const pulse = Math.sin(t + c * 0.5 + r * 0.3) * 0.5 + 0.5;
+
+              ctx.globalAlpha = 0.1 + pulse * 0.3;
+              ctx.fillRect(x, y, size, size);
+              ctx.globalAlpha = 0.3 + pulse * 0.4;
+              ctx.strokeRect(x, y, size, size);
+            }
+          }
+          ctx.globalAlpha = 1.0;
+          t += 0.03;
+          requestAnimationFrame(drawP4);
+        }
+        p4Canvas.width = 400;
+        p4Canvas.height = 300;
+        drawP4();
       }
     }
     setupProjectVisuals();
